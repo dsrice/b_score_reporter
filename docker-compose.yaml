@@ -1,0 +1,41 @@
+version: '3'
+services:
+  score_login:
+    container_name: score-login
+    build:
+      context: ./docker/login/
+    volumes:
+      - ./login:/go/src/login
+    tty: true
+    environment:
+      - TZ=Asia/Tokyo
+      - JAEGER_SERVICE_NAME=b_score_reporter_be
+      - JAEGER_ENDPOINT=http://jaeger:14268/api/traces
+      - GO_ENV=dev
+    ports:
+      - 1323:1323
+
+  score_db:
+    image: mysql:5.7
+    container_name: score-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: b_score
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./database/data:/var/lib/mysql
+    ports:
+      - 13306:3306
+
+  jaeger:
+    container_name: b_score_jaeger
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "14268:14268"
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+      - LOG_LEVEL=debug
