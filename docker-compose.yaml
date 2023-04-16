@@ -11,9 +11,13 @@ services:
       - TZ=Asia/Tokyo
       - JAEGER_SERVICE_NAME=b_score_reporter_be
       - JAEGER_ENDPOINT=http://jaeger:14268/api/traces
+      - APP_ROOT=/go/src/login
       - GO_ENV=dev
+    command:
+      - godoc -http=:13030
     ports:
-      - 1323:1323
+      - "1323:1323"
+      - "13030:13030"
 
   score_db:
     image: mysql:5.7
