@@ -10,6 +10,6 @@ import (
 func TestLoadEnv(t *testing.T) {
 	env.LoadEnv()
 
-	result := os.Getenv("TEST")
-	assert.Equal(t, result, "test2")
+	result := os.Getenv("DBNAME")
+	assert.Equal(t, result, "b_score")
 }
