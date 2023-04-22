@@ -5,3 +5,6 @@ RUN apk update && apk add git && \
 
 RUN mkdir ./login
 WORKDIR /go/src/login
+
+RUN  go install golang.org/x/tools/cmd/godoc@latest
+
