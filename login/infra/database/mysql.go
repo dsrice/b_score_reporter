@@ -4,6 +4,7 @@ import (
 	mysqldriver "github.com/go-sql-driver/mysql"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"login/domains/tables"
 	"os"
 	"time"
 )
@@ -34,5 +35,13 @@ func NewDataBase() *gorm.DB {
 		return nil
 	}
 
+	migrate(db)
+	
 	return db
+}
+
+func migrate(db *gorm.DB) {
+	db.AutoMigrate(&tables.User{})
+	db.AutoMigrate(&tables.Token{})
+	db.AutoMigrate(&tables.Login{})
 }
