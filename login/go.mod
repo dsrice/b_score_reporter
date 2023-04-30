@@ -9,6 +9,7 @@ require (
 	github.com/labstack/echo/v4 v4.10.2
 	github.com/stretchr/testify v1.8.1
 	go.uber.org/dig v1.16.1
+	golang.org/x/exp v0.0.0-20230425010034-47ecfdc1ba53
 	gorm.io/driver/mysql v1.5.0
 	gorm.io/gorm v1.25.0
 )

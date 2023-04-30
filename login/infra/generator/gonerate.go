@@ -17,10 +17,40 @@ type CodeInfo struct {
 	MockFlg     bool
 }
 
+func (info *CodeInfo) SetPackageInfo(command string) {
+	switch command {
+	case "controller":
+		info.PkIFName = "handlers"
+		info.PkCTName = "controllers"
+		info.IFPath = "app/controllers/handlers"
+		info.CTPath = "app/controllers"
+		info.MockFlg = false
+	case "usecase":
+		info.PkIFName = "interfaces"
+		info.PkCTName = "usecases"
+		info.IFPath = "app/usecases/interfaces"
+		info.CTPath = "app/usecases"
+		info.PkMockName = "mockusecases"
+		info.MockPath = "app/usecases/mockusecases"
+		info.MockFlg = true
+	case "repository":
+		info.PkIFName = "adapters"
+		info.PkCTName = "repositories"
+		info.IFPath = "app/repositories/adapters"
+		info.CTPath = "app/repositories"
+		info.PkMockName = "mockrepositories"
+		info.MockPath = "app/repositories/mockrepositories"
+		info.MockFlg = true
+	}
+}
+
 func (info CodeInfo) CreateCode() {
 	createInterface(info)
 	createContainer(info)
-	createMock(info)
+
+	if info.MockFlg {
+		createMock(info)
+	}
 }
 
 func createInterface(info CodeInfo) {
