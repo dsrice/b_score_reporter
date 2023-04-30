@@ -1,0 +1,12 @@
+web:
+  - web/**/*
+login:
+  - login/**/*
+login_controller:
+  - login/controllers/**/*
+login_domain:
+  - login/domains/**/*
+login_repository:
+  - login/repositories/**/*
+docker:
+  - docker/**/*
