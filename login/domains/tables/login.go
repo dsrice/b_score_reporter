@@ -6,7 +6,7 @@ import (
 )
 
 type Login struct {
-	ID            int       `gorm:"column:id;primaryKey""`
+	ID            int       `gorm:"column:id;primaryKey"`
 	UserID        int       `gorm:"column:user_id"`
 	User          User      `gorm:"foreignKey:UserID"`
 	ErrorCount    int       `gorm:"column:error_count"`
