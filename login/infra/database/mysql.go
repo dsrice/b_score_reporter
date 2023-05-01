@@ -31,6 +31,7 @@ func NewDataBase() *gorm.DB {
 
 	println(c.FormatDSN())
 	db, err := gorm.Open(mysql.Open(c.FormatDSN()), &gorm.Config{})
+
 	if err != nil {
 		println(err.Error())
 		return nil
@@ -49,6 +50,7 @@ func migrate(db *gorm.DB) {
 
 func execMigrate(db *gorm.DB, target interface{}) {
 	err := db.AutoMigrate(target)
+
 	if err != nil {
 		log.Error(err)
 	}
