@@ -22,4 +22,4 @@ jobs:
             level: warning
             filter_mode: nofilter
             workdir: "login/"
-            reporter:github-pr-review
+            reporter: github-pr-review
