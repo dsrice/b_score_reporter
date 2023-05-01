@@ -13,8 +13,8 @@ services:
       - JAEGER_ENDPOINT=http://jaeger:14268/api/traces
       - APP_ROOT=/go/src/login
       - GO_ENV=dev
-    command:
-      - godoc -http=:13030
+#    command:
+#      - godoc -http=:13030
     ports:
       - "1323:1323"
       - "13030:13030"
