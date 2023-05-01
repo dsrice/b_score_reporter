@@ -49,7 +49,6 @@ func migrate(db *gorm.DB) {
 
 func execMigrate(db *gorm.DB, target interface{}) {
 	err := db.AutoMigrate(target)
-
 	if err != nil {
 		log.Error(err)
 	}
