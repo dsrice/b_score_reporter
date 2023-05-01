@@ -31,7 +31,6 @@ func NewDataBase() *gorm.DB {
 
 	println(c.FormatDSN())
 	db, err := gorm.Open(mysql.Open(c.FormatDSN()), &gorm.Config{})
-
 	if err != nil {
 		println(err.Error())
 		return nil
