@@ -9,6 +9,7 @@ import (
 
 func TestNewDataBase(t *testing.T) {
 	env.LoadEnv()
+
 	db := database.NewDataBase()
 
 	assert.NotNil(t, db)
