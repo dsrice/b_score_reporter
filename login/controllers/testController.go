@@ -1,18 +1,29 @@
 package controllers
 
 import (
+	"github.com/labstack/echo-contrib/jaegertracing"
 	"github.com/labstack/echo/v4"
+	"github.com/opentracing/opentracing-go/log"
 	"login/controllers/handlers"
+	"login/repositories/adapters"
 	"net/http"
 )
 
 type testController struct {
+	repo adapters.UserAdapter
 }
 
-func NewtestController() handlers.TestHandler {
-	return &testController{}
+func NewtestController(repo adapters.UserAdapter) handlers.TestHandler {
+	return &testController{
+		repo: repo,
+	}
 }
 
 func (ct *testController) Get(c echo.Context) error {
+	sp := jaegertracing.CreateChildSpan(c, "Controller")
+	defer sp.Finish()
+
+	sp.SetTag("testController", "Get")
+	sp.LogFields(log.String("controller", "start"))
 	return c.String(http.StatusOK, "test")
 }

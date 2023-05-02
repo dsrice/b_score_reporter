@@ -6,11 +6,14 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"login/domains/tables"
+	"login/infra/env"
 	"os"
 	"time"
 )
 
 func NewDataBase() *gorm.DB {
+	env.LoadEnv()
+
 	jst, err := time.LoadLocation("Asia/Tokyo")
 	if err != nil {
 		println(err.Error())

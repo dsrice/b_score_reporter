@@ -36,6 +36,9 @@ linters-settings:
       - ifElseChain
       - octalLiteral
       - whyNoLint
+    settings:
+      hugeParam:
+        sizeThreshold: 200
   gocyclo:
     min-complexity: 15
   gofmt:
@@ -95,7 +98,6 @@ linters:
     - exportloopref
     - funlen
     - gochecknoinits
-    - gochecknoglobals
     - gocognit
     - goconst
     - gocritic

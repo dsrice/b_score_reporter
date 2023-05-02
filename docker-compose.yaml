@@ -9,7 +9,7 @@ services:
     tty: true
     environment:
       - TZ=Asia/Tokyo
-      - JAEGER_SERVICE_NAME=b_score_reporter_be
+      - JAEGER_SERVICE_NAME=b_score_reporter_login
       - JAEGER_ENDPOINT=http://jaeger:14268/api/traces
       - APP_ROOT=/go/src/login
       - GO_ENV=dev
