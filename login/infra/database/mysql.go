@@ -40,13 +40,13 @@ func NewDataBase() *gorm.DB {
 	db, err := gorm.Open(mysql.Open(c.FormatDSN()), &gorm.Config{
 		Logger: zLogger,
 	})
-
-	db.Logger = db.Logger.LogMode(logger.Info)
-
 	if err != nil {
 		println(err.Error())
 		return nil
 	}
+
+	db.Logger = db.Logger.LogMode(logger.Info)
+	SetCallBack(db)
 
 	migrate(db)
 

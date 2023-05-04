@@ -52,4 +52,5 @@ func (repo *userRepository) GetUser(sc tables.User) ([]*tables.User, error) {
 
 func (repo *userRepository) SetContext(c echo.Context) {
 	repo.c = c
+	repo.db.Statement.Context = c.Request().Context()
 }
