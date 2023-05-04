@@ -1,6 +1,7 @@
 package server
 
 import (
+	"github.com/labstack/echo-contrib/jaegertracing"
 	"github.com/labstack/echo/v4"
 	"login/controllers/handlers"
 )
@@ -21,6 +22,9 @@ func (s *Server) Start() {
 	e := echo.New()
 
 	e.GET("/", s.TestController.Get)
+
+	c := jaegertracing.New(e, nil)
+	defer c.Close()
 
 	e.Logger.Fatal(e.Start(":1323"))
 }

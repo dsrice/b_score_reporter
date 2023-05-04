@@ -36,6 +36,9 @@ linters-settings:
       - ifElseChain
       - octalLiteral
       - whyNoLint
+    settings:
+      hugeParam:
+        sizeThreshold: 200
   gocyclo:
     min-complexity: 15
   gofmt:
@@ -56,6 +59,8 @@ linters-settings:
       - '1'
       - '2'
       - '3'
+      - '12'
+      - '60'
     ignored-functions:
       - strings.SplitN
 
@@ -95,7 +100,6 @@ linters:
     - exportloopref
     - funlen
     - gochecknoinits
-    - gochecknoglobals
     - gocognit
     - goconst
     - gocritic

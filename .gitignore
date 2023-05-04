@@ -1,3 +1,4 @@
 ﻿.idea
 login/dev.env
 database/data
+login/log

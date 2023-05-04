@@ -1,7 +1,6 @@
-FROM golang:1.20-alpine
+FROM golang:1.20
 
-RUN apk update && apk add git && \
-    tzdata
+RUN apt-get update && apt-get install -y tzdata
 
 WORKDIR /go
 RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.52.2

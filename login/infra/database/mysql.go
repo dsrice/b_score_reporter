@@ -5,12 +5,18 @@ import (
 	"github.com/labstack/gommon/log"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	"login/domains/tables"
+	"login/infra/env"
+	zaplogger "login/infra/logger"
+	"moul.io/zapgorm2"
 	"os"
 	"time"
 )
 
 func NewDataBase() *gorm.DB {
+	env.LoadEnv()
+
 	jst, err := time.LoadLocation("Asia/Tokyo")
 	if err != nil {
 		println(err.Error())
@@ -29,12 +35,21 @@ func NewDataBase() *gorm.DB {
 		AllowNativePasswords: true,
 	}
 
-	println(c.FormatDSN())
-	db, err := gorm.Open(mysql.Open(c.FormatDSN()), &gorm.Config{})
+	zLogger := zapgorm2.New(zaplogger.NewLogger())
 
+	db, err := gorm.Open(mysql.Open(c.FormatDSN()), &gorm.Config{
+		Logger: zLogger,
+	})
 	if err != nil {
 		println(err.Error())
 		return nil
+	}
+
+	db.Logger = db.Logger.LogMode(logger.Info)
+	err = SetCallBack(db)
+
+	if err != nil {
+		println(err.Error())
 	}
 
 	migrate(db)
