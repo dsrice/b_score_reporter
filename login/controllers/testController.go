@@ -5,6 +5,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/opentracing/opentracing-go/log"
 	"login/controllers/handlers"
+	"login/domains/tables"
 	"login/repositories/adapters"
 	"net/http"
 )
@@ -25,5 +26,8 @@ func (ct *testController) Get(c echo.Context) error {
 
 	sp.SetTag("testController", "Get")
 	sp.LogFields(log.String("controller", "start"))
+
+	ct.repo.SetContext(c)
+	ct.repo.GetUser(tables.User{})
 	return c.String(http.StatusOK, "test")
 }
