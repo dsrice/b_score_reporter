@@ -46,7 +46,11 @@ func NewDataBase() *gorm.DB {
 	}
 
 	db.Logger = db.Logger.LogMode(logger.Info)
-	SetCallBack(db)
+	err = SetCallBack(db)
+
+	if err != nil {
+		println(err.Error())
+	}
 
 	migrate(db)
 

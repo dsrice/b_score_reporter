@@ -43,6 +43,7 @@ func (repo *userRepository) GetUser(sc tables.User) ([]*tables.User, error) {
 	err := repo.db.Where(&sc).Find(&userList)
 
 	sp.LogFields(log.String("status", "start"))
+
 	if err.Error != nil {
 		return nil, err.Error
 	}

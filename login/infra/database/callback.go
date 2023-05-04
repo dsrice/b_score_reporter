@@ -93,6 +93,7 @@ func after(db *gorm.DB) {
 	if !ok || sp == nil {
 		return
 	}
+
 	defer sp.Finish()
 
 	sp.LogFields(log.String("SQL", db.Statement.SQL.String()))

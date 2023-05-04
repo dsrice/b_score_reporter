@@ -28,6 +28,11 @@ func (ct *testController) Get(c echo.Context) error {
 	sp.LogFields(log.String("controller", "start"))
 
 	ct.repo.SetContext(c)
-	ct.repo.GetUser(tables.User{})
-	return c.String(http.StatusOK, "test")
+	userList, err := ct.repo.GetUser(tables.User{})
+
+	if err != nil {
+		log.Error(err)
+	}
+
+	return c.JSON(http.StatusOK, userList)
 }
