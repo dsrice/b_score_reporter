@@ -61,6 +61,6 @@ func SetConfig() zap.Config {
 func JSTTimeEncoder(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
 	const layout = "2006-01-02T15:04:05"
 
-	jst := time.FixedZone("Asia/Tokyo", 9*60*60)
+	jst := time.FixedZone("Asia/Tokyo", 32400)
 	enc.AppendString(t.In(jst).Format(layout))
 }
